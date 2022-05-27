@@ -1,0 +1,32 @@
+.main{
+    @include flexBox (column, center, flex-start);
+    background-color: $color-lightgrey;
+    min-height: 100vh;
+    width: 100%;
+    .text-container{
+      @include flexBox (column, center, center);
+      width: 100%;
+      text-align: center;
+      padding: 20px;
+      h2{
+        text-align: center;
+        font-size: 24px;
+      }
+      p{
+        width: 444px;
+        font-size: 12px;
+        color: $color-text-p;
+        margin-top: 20px;
+      }
+  }
+  .home-container{
+    @include flexBox (row, flex-start, space-between);
+    min-height: 100vh;
+    width: 100%;
+    padding: 10px 30px;
+  }
+
+}
+
+
+

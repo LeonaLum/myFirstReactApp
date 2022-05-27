@@ -1,0 +1,102 @@
+.list-container{
+  @include flexBox (column, center, space-around);
+  padding: 0px 40px;
+  width: 100%;
+  a{
+    @include flexBox (row, center, center);
+    text-align: center;
+    align-self: flex-end;
+    width: 180px;
+    .plus{
+      font-size: 20px;
+      margin-right: 5px;
+    }
+  }
+ .applist{
+   position:relative;
+   width: 100%;
+   margin-top: 30px;
+   input{
+     margin-right:10px;
+   }
+   .applist-head{
+    @include flexBox (row, center, space-around);
+     height: 40px;
+     background-color: $color-lightgrey;
+     border: 1.5px solid $color-borders;
+     border-bottom: 1px solid $color-borders;
+     padding:20px;
+     h3{
+       color: $color-text-p;
+       font-size: 12px;
+       font-weight: 400;
+     }
+     .arrows{
+      margin-left: 5px;
+      height: 10px;
+      width: 10px;
+      background-image:url(./img/arrows.png);
+      background-position: center;
+      background-size: contain;
+    }
+     .head-name{
+      @include flexBox (row, center, flex-start);
+       flex:0.7;
+     }
+     .head-date{
+      @include flexBox (row, center, flex-start);
+       flex: 0.7;
+     }
+     .head-creator{
+      @include flexBox (row, center, flex-start);
+       flex:0.7;
+     }
+     .head-url{
+      @include flexBox (row, center, flex-start);
+       flex:1;
+     }
+   }
+   .applist-body{
+    @include flexBox (column, center, flex-start);
+     min-height: 100vh;
+     .app-item{
+      @include flexBox (row, center, space-around);
+       border: solid 1px $color-borders;
+       font-size: 12px;
+       padding: 5px 20px;
+       width: 100%;
+       background-color: $color-white;
+       h4{
+         font-weight: 400;
+       }
+       .body-name{
+         flex:0.7;
+       }
+       .body-date{
+         flex:0.7;
+       }
+       .body-creator{
+         flex:0.7;
+       }
+       .body-url{
+         flex:1;
+         .url{
+           color: $color-green;
+         }
+       }
+  
+       .more-icon{
+         height: 15px;
+         width: 15px;
+         background-image: url(./img/dots.png);
+         background-size: contain;
+         background-position: center;
+         background-repeat: no-repeat;
+         &:hover{
+           cursor: pointer;
+         }
+       }
+     }
+   }
+ }
+}

@@ -1,0 +1,45 @@
+.main-head{
+  @include flexBox(row, center, space-between);
+  background-color: $color-white;
+  width: 100%;
+  height: 60px;
+  border-bottom: $color-borders 1px solid;
+
+  .category{
+    @include flexBox(row, center, flex-start);
+    height: 100%;
+    width: 300px;
+    h2{
+      margin-left: 20px;
+      border-left: $color-lightgrey solid 1.5px;
+      font-size: 17px;
+      font-weight: 600;
+      padding: 0px 10px;
+    }
+
+  }
+  .head-content{
+    @include flexBox(row, center, center);
+    height: 100%;
+    padding:20px;
+    .username{
+      margin-left: 6px;
+      font-weight: 400;
+    }
+    .user-image{
+      @include flexBox(row, center, center);
+      height: 32px;
+      width: 32px;
+      background-color: $color-user-image;
+      border-radius: 100%;
+      p{
+        font-weight: 600;
+        font-size: 14px;
+        width: 100%;
+        color: white;
+        text-align: center;
+      }
+     
+    }
+  }
+}
