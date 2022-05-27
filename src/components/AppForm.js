@@ -28,7 +28,7 @@ const AppForm = () => {
       nameValidation.current.innerText = "The name has to be at least 3 characters";
       setTimeout(removeMessage, 3000)
     }
-    else if(name.length > 3 && name.length < 100){
+    else if(name.length >= 3 && name.length < 100){
       const stringUrl = `${url.toString()}`;
       const sweetUrl = ".my.sweetcloud.se";
       setUrl(stringUrl);
