@@ -48,7 +48,7 @@ button {
 }
 
 .hide {
-  display: none;
+  visibility: hidden;
 }
 
 .validation {
@@ -663,7 +663,7 @@ button {
   color: #64B867;
 }
 
-.list-container .applist .applist-body .app-item .more-icon {
+.more-icon {
   height: 15px;
   width: 15px;
   background-image: url(./img/dots.png);
@@ -672,7 +672,7 @@ button {
   background-repeat: no-repeat;
 }
 
-.list-container .applist .applist-body .app-item .more-icon:hover {
+.more-icon:hover {
   cursor: pointer;
 }
 

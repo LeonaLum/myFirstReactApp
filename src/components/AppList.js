@@ -45,6 +45,7 @@ const AppList = () => {
           <section className="head-url"><h3>URL address</h3>
             <div className="arrows"></div>
           </section>
+          <div className="more-icon hide"></div>
         </div>
 
         {apps &&  
