@@ -28,6 +28,13 @@ const AppForm = () => {
       nameValidation.current.innerText = "The name has to be at least 3 characters";
       setTimeout(removeMessage, 3000)
     }
+    else if(name.length > 100){
+      let removeMessage = () => {
+        nameValidation.current.innerText = "";
+        }
+        nameValidation.current.innerText = "Name can't surpass 100 characters";
+        setTimeout(removeMessage, 3000)
+    }
     else if(name.length >= 3 && name.length < 100){
       const stringUrl = `${url.toString()}`;
       const sweetUrl = ".my.sweetcloud.se";
@@ -81,7 +88,7 @@ const AppForm = () => {
     <form className="app-form" onSubmit={handleSubmit}>
       <h3>New application</h3>
 
-      <section className="form-section">
+      <fieldset className="form-section">
         <label htmlFor="inputName">Name</label>
         <input 
         type="text" 
@@ -92,9 +99,9 @@ const AppForm = () => {
         />
         <p className="validation" ref={nameValidation}></p>
        
-      </section>
+      </fieldset>
 
-      <section className="form-section">
+      <fieldset className="form-section">
         <label htmlFor="inputUrl">URL address</label>
         <div className='url-section'>
           <input 
@@ -110,9 +117,9 @@ const AppForm = () => {
           </div>
         </div>
         <p className="validation" ref={urlValidation}></p>
-      </section>
+      </fieldset>
 
-      <section className="form-section">
+      <fieldset className="form-section">
         <label htmlFor="inputDomain">Connect a domain you already own</label>
         <input 
         type="text" 
@@ -123,14 +130,14 @@ const AppForm = () => {
           + Add more
         </button>
 
-      </section>
+      </fieldset>
 
-      <section className="form-footer">
+      <footer className="form-footer">
          <Link to="/applications"className="cancel-button">Cancel</Link>
          <button className="save-button">
            Save
          </button>
-      </section>
+      </footer>
     </form>
    );
 }

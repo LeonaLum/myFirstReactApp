@@ -532,9 +532,9 @@ button {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  -webkit-box-flex: 0.7;
-      -ms-flex: 0.7;
-          flex: 0.7;
+  -webkit-box-flex: 0.8;
+      -ms-flex: 0.8;
+          flex: 0.8;
 }
 
 .list-container .applist .applist-head .head-date {
@@ -636,9 +636,13 @@ button {
 }
 
 .list-container .applist .applist-body .app-item .body-name {
-  -webkit-box-flex: 0.7;
-      -ms-flex: 0.7;
-          flex: 0.7;
+  -webkit-box-flex: 0.8;
+      -ms-flex: 0.8;
+          flex: 0.8;
+}
+
+.list-container .applist .applist-body .app-item .body-name h4 {
+  word-break: break-all;
 }
 
 .list-container .applist .applist-body .app-item .body-date {
@@ -660,6 +664,7 @@ button {
 }
 
 .list-container .applist .applist-body .app-item .body-url .url {
+  word-break: break-all;
   color: #64B867;
 }
 
@@ -707,6 +712,7 @@ button {
       -ms-flex-pack: start;
           justify-content: flex-start;
   padding: 10px 20px;
+  border: none;
 }
 
 .app-form .form-section .add-dom-button {

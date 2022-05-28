@@ -41,7 +41,7 @@
     }
      .head-name{
       @include flexBox (row, center, flex-start);
-       flex:0.7;
+       flex:0.8;
      }
      .head-date{
       @include flexBox (row, center, flex-start);
@@ -70,7 +70,10 @@
          font-weight: 400;
        }
        .body-name{
-         flex:0.7;
+         flex:0.8;
+         h4{
+          word-break: break-all;
+        }
        }
        .body-date{
          flex:0.7;
@@ -81,6 +84,7 @@
        .body-url{
          flex:1;
          .url{
+           word-break: break-all;
            color: $color-green;
          }
        }
