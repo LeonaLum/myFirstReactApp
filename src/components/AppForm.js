@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 export let user = ["Magica", " ", "Dimitrova"];
 
 const AppForm = () => {
@@ -9,35 +9,86 @@ const AppForm = () => {
   }
   const nameValidation = useRef(null);
   const urlValidation = useRef(null);
+  const domainValidation = useRef(null);
+  let buttonAddDomain = useRef(null);
 
-  const [name, setName] = useState();
-  const [url, setUrl] = useState();
+  const [name, setName] = useState("");
+  const [url, setUrl] = useState("");
+  const [domains, setDomains] = useState();
+  const [ownDomain, setOwnDomain] = useState("");
 
   const slash = "/";
   const hyphen = "-";
   const date = formatDate(new Date()).toString().replaceAll(slash, hyphen);
 
+  useEffect(() => {
+    fetch('http://localhost:8000/domains')
+      .then(res => {
+        return res.json()
+      })
+      .then(data => {
+        setDomains(data)
+        if(data.length == 3){
+          buttonAddDomain.current.style.pointerEvents="none";
+          buttonAddDomain.current.style.color="#7F7F7F";
+
+        }
+      })
+      .catch((error) => {
+        console.log(error.message)
+      })
+  }, []);
+
+
+  function throwError(message, type){
+    let validationType;
+    if(type == "url"){
+      validationType = urlValidation;
+    }
+    else if(type == "name"){
+      validationType = nameValidation;
+    }
+    else{
+      validationType = domainValidation;
+    }
+  
+    let removeMessage = () => {
+      validationType.current.innerText = "";
+      }
+      validationType.current.innerText = message;
+      setTimeout(removeMessage, 3000)
+  }
 
   const handleSubmit = (e) => {
     
     e.preventDefault();
-    if(name.length < 3){
-      let removeMessage = () => {
-      nameValidation.current.innerText = "";
-      }
-      nameValidation.current.innerText = "The name has to be at least 3 characters";
-      setTimeout(removeMessage, 3000)
+
+    let message = "";
+    let type = "";
+
+    if(name == "" && url == ""){
+       message = "Please fill in the fields";
+       type = "name";
+       throwError(message, type);
+    }
+    else if(name.length < 3){
+       message = "The name has to contain at least 3 characters";
+       type = "name";
+       throwError(message, type);
     }
     else if(name.length > 100){
-      let removeMessage = () => {
-        nameValidation.current.innerText = "";
-        }
-        nameValidation.current.innerText = "Name can't surpass 100 characters";
-        setTimeout(removeMessage, 3000)
+        message = "Name can't surpass 100 characters";
+        type = "name";
+        throwError(message, type);
+    }
+    else if(url === "" && ownDomain == ""){
+       message = "Please type a url or connect a domain";
+       type = "url";
+       throwError(message, type);
     }
     else if(name.length >= 3 && name.length < 100){
       const stringUrl = `${url.toString()}`;
-      const sweetUrl = ".my.sweetcloud.se";
+      const sweetSuffix = ".my.sweetcloud.se";
       setUrl(stringUrl);
 
       //Fetch the apps to see if the url exists
@@ -54,21 +105,27 @@ const AppForm = () => {
       //Pass the json data to a function to check the url
       function checkUrl(data){
         let urlError;
+
         data.forEach((app) => {
-          if(app.url === stringUrl+sweetUrl){
+          if(app.url === stringUrl+sweetSuffix || app.url === ownDomain){
             urlError = true;
           }
         })
         if(urlError){
-          let removeMessage = () => {
-            urlValidation.current.innerText = "";
-          }
-            urlValidation.current.innerText = "This URL already exists";
-          setTimeout(removeMessage, 3000)
+          message = "The URL/domain is already used"
+          type = "";
+          throwError(message, type)
         }
         else{
           console.log("app added!")
-          const application = { name, date, creator:user, url:stringUrl+sweetUrl };
+          let application;
+
+          if(ownDomain != ""){
+            application = { name, date, creator:user, url:ownDomain };
+          }
+          else{
+            application = { name, date, creator:user, url:stringUrl+sweetSuffix };
+          }
           //If the url is free, convert to json and post
           fetch('http://localhost:8000/apps', {
             method: 'POST',
@@ -83,9 +140,16 @@ const AppForm = () => {
       }
    }
   }
+
+  const setDomain = (e) => {
+      let targetDomain = e.target.innerText;
+      setOwnDomain(targetDomain)
+      setUrl("");
+
+  }
   return ( 
   
-    <form className="app-form" onSubmit={handleSubmit}>
+    <form noValidate className="app-form" onSubmit={handleSubmit}>
       <h3>New application</h3>
 
       <fieldset className="form-section">
@@ -109,8 +173,8 @@ const AppForm = () => {
           type="text" 
           id="inputUrl"
           value={url}
+          onFocus={() => setOwnDomain("")}
           onChange={(e) => setUrl(e.target.value)}
-          required
           />
           <div className="displayed-url">
             <p>.my.sweetcloud.se</p>
@@ -120,15 +184,25 @@ const AppForm = () => {
       </fieldset>
 
       <fieldset className="form-section">
-        <label htmlFor="inputDomain">Connect a domain you already own</label>
+        <label htmlFor="showDomain">Connect a domain you already own</label>
         <input 
         type="text" 
-        id="inputDomain"
+        id="showDomain"
+        disabled
+        onFocus={() => setUrl("")}
+        value={ownDomain}
         />
-
-        <button className="add-dom-button">
+        {domains &&
+          <ul className="saved-domains">
+            {domains.map((domain) => (
+              <li className="domain-item" key= { domain.id } onClick={setDomain}><p>{ domain.name }</p></li>
+            ))}
+          </ul>
+        }
+        <p className="validation" ref={domainValidation}></p>
+        <Link to="/applications/create/savedom" className="add-dom-button" ref={buttonAddDomain}>
           + Add more
-        </button>
+        </Link>
 
       </fieldset>
 

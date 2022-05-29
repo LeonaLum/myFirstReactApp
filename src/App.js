@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Home from './Home';
 import Applications from './Applications';
 import CreateApp from "./CreateApp";
+import AddDom from "./AddDom";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
               </Route>
               <Route exact path="/applications/create">
                 <CreateApp />
+              </Route>
+              <Route exact path="/applications/create/savedom">
+                <AddDom />
               </Route>
             </Switch>
         </div>

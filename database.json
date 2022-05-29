@@ -10,6 +10,27 @@
       ],
       "url": "dashboard.my.sweetcloud.se",
       "id": 1
+    },
+    {
+      "name": "Weather App",
+      "date": "29-05-2022",
+      "creator": [
+        "Magica",
+        " ",
+        "Dimitrova"
+      ],
+      "url": "whatstheweather.se",
+      "id": 2
+    }
+  ],
+  "domains": [
+    {
+      "name": "mycustomdomain.com",
+      "id": 4
+    },
+    {
+      "name": "whatstheweather.se",
+      "id": 5
     }
   ]
 }

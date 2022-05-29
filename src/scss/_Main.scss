@@ -20,7 +20,7 @@
       }
   }
   .home-container{
-    @include flexBox (row, flex-start, space-between);
+    @include flexBox (row, flex-start, center);
     min-height: 100vh;
     width: 100%;
     padding: 10px 30px;

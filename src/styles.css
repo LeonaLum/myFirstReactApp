@@ -53,6 +53,7 @@ button {
 
 .validation {
   color: red;
+  font-weight: 600;
 }
 
 .navbar {
@@ -311,9 +312,9 @@ button {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   min-height: 100vh;
   width: 100%;
   padding: 10px 30px;
@@ -643,6 +644,7 @@ button {
 
 .list-container .applist .applist-body .app-item .body-name h4 {
   word-break: break-all;
+  padding-right: 10px;
 }
 
 .list-container .applist .applist-body .app-item .body-date {
@@ -715,13 +717,48 @@ button {
   border: none;
 }
 
+.app-form .form-section .saved-domains {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding: 10px 0px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.app-form .form-section .saved-domains .domain-item {
+  padding: 10px;
+  border: solid #C4C4C499 1.5px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.app-form .form-section .saved-domains .domain-item:hover {
+  cursor: pointer;
+  background-color: #E5E5E5;
+}
+
 .app-form .form-section .add-dom-button {
   color: #64B867;
   background-color: #FFFFFF;
+  border-bottom: 1.5px solid rgba(0, 128, 0, 0);
+  -webkit-transition: 0.1s all ease-in-out;
+  transition: 0.1s all ease-in-out;
 }
 
 .app-form .form-section .add-dom-button:hover {
   cursor: pointer;
+  border-bottom: 1.5px solid #64B867;
 }
 
 .app-form .form-section label {
@@ -818,7 +855,6 @@ button {
 
 .app-form .form-footer .cancel-button {
   color: black;
-  background-color: #FFFFFF;
   padding: 7px 20px;
   font-size: 17px;
 }

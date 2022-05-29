@@ -15,11 +15,29 @@
     @include flexBox (column, flex-start, flex-start);
     padding: 10px 20px;
     border: none;
+    .saved-domains{
+      @include flexBox (row, flex-start, flex-start);
+      padding: 10px 0px;
+      flex-wrap: wrap;
+      .domain-item{
+        padding: 10px;
+        border: solid $color-borders 1.5px;
+        border-radius: 5px;
+        font-size: 14px;
+        &:hover{
+          cursor: pointer;
+          background-color: $color-lightgrey;
+        }
+      }
+    }
     .add-dom-button{
       color: $color-green;
       background-color: $color-white;
+      border-bottom: 1.5px solid rgba(0, 128, 0, 0);
+      transition: 0.1s all ease-in-out;
       &:hover{
         cursor: pointer;
+        border-bottom: 1.5px solid $color-green;
       }
     }
     label{
@@ -68,7 +86,6 @@
     }
     .cancel-button{
       color: black;
-      background-color: $color-white;
       padding:7px 20px;
       font-size: 17px;
       &:hover{
