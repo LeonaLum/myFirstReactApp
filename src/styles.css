@@ -338,6 +338,7 @@ button {
   border: #C4C4C499 1px solid;
   height: 400px;
   width: 300px;
+  margin-left: 30px;
 }
 
 .card .img {
