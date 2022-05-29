@@ -21,9 +21,9 @@
   }
   .home-container{
     @include flexBox (row, flex-start, center);
+    flex-wrap: wrap;
     min-height: 100vh;
     width: 100%;
-    padding: 10px 30px;
   }
 
 }
