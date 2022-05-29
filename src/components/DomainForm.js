@@ -3,26 +3,34 @@ import { Link } from 'react-router-dom';
 
 const DomainForm = () => {
 
-  const [domain, setDomain] = useState();
+  const domainValidation = useRef(null);
+  const [domain, setDomain] = useState("");
 
   const addDomain = (e) => {
     e.preventDefault();
+    if(domain == ""){
+      domainValidation.current.innerText = "Please provide your domain";
+    }
+    else if(!domain.includes(".")){
+      domainValidation.current.innerText = "This domain is not valid";
+    }
+    else{
+      const savedDomain = { name:domain };
 
-    const savedDomain = { name:domain };
+      fetch('http://localhost:8000/domains', {
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(savedDomain)
+      }).then(() => {
+        console.log('domain added!')
+      }).catch(err => console.log(err))
 
-    fetch('http://localhost:8000/domains', {
-      method: 'POST',
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(savedDomain)
-     }).then(() => {
-       console.log('domain added!')
-    }).catch(err => console.log(err))
-
-    window.location.pathname = "/applications/create"; 
+      window.location.pathname = "/applications/create"; 
+    }
   }
 
   return ( 
-    <form className="app-form" onSubmit={addDomain}>
+    <form noValidate className="app-form" onSubmit={addDomain}>
       <h3>Add your domain</h3>
       <fieldset className="form-section">
         <label htmlFor="inputDomain">Domain</label>
@@ -31,8 +39,8 @@ const DomainForm = () => {
           id="inputDomain" 
           value={domain}
           onChange={(e) => setDomain(e.target.value)}
-          required
           />
+        <p className="validation" ref={domainValidation}></p>
       </fieldset>
       <footer className="form-footer">
          <Link to="/applications/create"className="cancel-button">

@@ -21,6 +21,9 @@ const AppForm = () => {
   const hyphen = "-";
   const date = formatDate(new Date()).toString().replaceAll(slash, hyphen);
 
+  let message = "";
+  let type = "";
+
   useEffect(() => {
     fetch('http://localhost:8000/domains')
       .then(res => {
@@ -31,7 +34,6 @@ const AppForm = () => {
         if(data.length == 3){
           buttonAddDomain.current.style.pointerEvents="none";
           buttonAddDomain.current.style.color="#7F7F7F";
-
         }
       })
       .catch((error) => {
@@ -62,9 +64,6 @@ const AppForm = () => {
   const handleSubmit = (e) => {
     
     e.preventDefault();
-
-    let message = "";
-    let type = "";
 
     if(name == "" && url == ""){
        message = "Please fill in the fields";
