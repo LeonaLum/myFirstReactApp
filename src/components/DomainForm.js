@@ -14,18 +14,44 @@ const DomainForm = () => {
     else if(!domain.includes(".")){
       domainValidation.current.innerText = "This domain is not valid";
     }
+    //Check if the domain already exists
     else{
-      const savedDomain = { name:domain };
+      fetch('http://localhost:8000/domains')
+      .then(res => {
+        return res.json()
+      })
+      .then(data => {
+        checkDomain(data);
+      })
+      .catch((error) => {
+        console.log(error.message)
+      })
+ 
+      function checkDomain(data){
+        let domainError;
+        data.forEach((savedDom) => {
+          if(savedDom.name == domain){
+            domainError = true;
+          } 
+        })
+        if(domainError){
+          domainValidation.current.innerText = "You have already added this domain";
+        }
+        else{
+          const savedDomain = { name:domain};
 
-      fetch('http://localhost:8000/domains', {
-        method: 'POST',
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(savedDomain)
-      }).then(() => {
-        console.log('domain added!')
-      }).catch(err => console.log(err))
+          fetch('http://localhost:8000/domains', {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(savedDomain)
+          }).then(() => {
+            console.log('domain added!')
+          }).catch(err => console.log(err))
 
-      window.location.pathname = "/applications/create"; 
+          window.location.pathname = "/applications/create"; 
+
+        }
+      }
     }
   }
 
@@ -37,7 +63,7 @@ const DomainForm = () => {
           <input 
           type="text" 
           id="inputDomain" 
-          value={domain}
+          value={domain.toLowerCase()}
           onChange={(e) => setDomain(e.target.value)}
           />
         <p className="validation" ref={domainValidation}></p>

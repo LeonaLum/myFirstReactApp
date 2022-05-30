@@ -171,7 +171,7 @@ const AppForm = () => {
           className="input-url" 
           type="text" 
           id="inputUrl"
-          value={url}
+          value={url.toLowerCase()}
           onFocus={() => setOwnDomain("")}
           onChange={(e) => setUrl(e.target.value)}
           />

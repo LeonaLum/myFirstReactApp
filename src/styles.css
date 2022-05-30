@@ -154,6 +154,10 @@ button {
   margin-right: 12px;
 }
 
+.navbar .options-list .container-bottom {
+  height: 10px;
+}
+
 .main-head {
   display: -webkit-box;
   display: -ms-flexbox;
